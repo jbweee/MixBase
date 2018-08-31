@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > MixBase
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > This will be for individuals who enjoy listening to long music mixes (> 25 min) instead of the usual song after song.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Sometimes the break off between songs is extremely distracting and individuals would rather listen to a long mix that flows. This product is for those interested in DJ mixes or just wanting to have something fluid while they study for a Technical Assessment. MixBase will allow users to search for mixes longer than 25 min (or of a set duration) and allowing them to save certain mixes to their profile with the click of a button.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Music streaming sites such as SoundCloud and Spotify don't have search settings to find content based on duration of tracks.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > SoundCloud's and Spotify's API both have duration and other properties in their object models that us developers can utilize to filter through searched content.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "MixBase will cater to those looking for music content that flows fluidly and is part of a more cohesive time block instead of the usual break between every 3-4 minute song."
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Initially, there will be no database saving. We will first be implementing the search function to GET data from the SoundCloud API and render that to the user. After, we'll implement a button that will allow the user to save mixes to the database and allow them to access the content on a "Saved" page.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I have always been using search terms such as 'mixes' and 'sets' when trying to find content on SoundCloud or YouTube to find mixes, but this app allows me to set the duration of the music content I am looking for. No more sifting through searches!"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > 
