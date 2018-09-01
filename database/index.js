@@ -41,7 +41,7 @@ let save = (tracks, callback) => {
     })
     Track.insertMany(mappedData)
       .then((docs) => callback(null, docs))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRRR', err));
   //     , (err, docs) => {
   //     if (err) {
   //       console.log(err);

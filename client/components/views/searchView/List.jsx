@@ -1,24 +1,15 @@
-import React, {Component} from "React";
+import React from "React";
 import ListEntry from "./ListEntry.jsx";
 
-class List extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tracks: [],
-    }
-  }
-
-  render() {
-    return(
-      <div>
-        Tracks List
-        {/* {this.state.tracks.map((track) => {
-          <ListEntry track={track}/>
-        })} */}
-      </div>
-    )
-  }
+const List = props => {
+  return(
+    <div>
+      Tracks List
+      {props.tracks.map( (track) => 
+        (<ListEntry track={track} key={track.id}/>)
+      )}
+    </div>
+  )
 }
 
 export default List;

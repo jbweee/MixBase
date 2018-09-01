@@ -82,7 +82,7 @@ var authOptions = {
 // }
 //////////////////////////////////////////////////////////////////////////////////////
 var token;
-module.exports = (term) => {
+module.exports = (term, callback) => {
   request
     .post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
@@ -95,25 +95,27 @@ module.exports = (term) => {
           },
           json: true
         };
-        console.log(token)
-        request.get(options, function(error, response, body) {
-          // console.log(body);
-          if (error) {
-            console.log("Error obtaining data from API");
-          } else {
-            let data = body.tracks.items;
-            // console.log(body.tracks.items[0]);
-            db.save(data, (err, docs) => {
-              if (err) {
-                console.error.bind(console, 'Error saving to DATABASE')
-              } else {
-                // response.send(docs);
-                console.log(docs)
-              }
-            })
-          }
-        });
-      }
+        request
+          .get(options, function(error, res, body) {
+            // console.log(body);
+            if (error) {
+              console.log("Error obtaining data from API");
+            } else {
+              let data = body.tracks.items;
+              // console.log(body.tracks.items[0]);
+              db.save(data, (err, docs) => {
+                if (err) {
+                  console.error.bind(console, 'Error saving to DATABASE')
+                } else {
+                  console.log('DATA SAVED')
+                  callback(null, docs);
+                  // console.log(res)
+                  // res.send('GET request ENDED');
+                }
+              })
+            }
+          });
+        }
 })};
 ////////////////////////////////////////////////////////////
 // rp(options)

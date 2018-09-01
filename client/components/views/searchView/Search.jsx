@@ -8,10 +8,11 @@ class Search extends Component {
     super(props);
     this.state = {
       term: '',
+      tracks: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    // this.fetch = this.fetch.bind(this);
+    this.fetch = this.fetch.bind(this);
     this.post = this.post.bind(this);
   };
 
@@ -30,19 +31,26 @@ class Search extends Component {
       .post('/mixBase/search', { searchTerm: term } )
       .then(() => {
         console.log('Post sent to server')
-        //this.fetch();
+        this.fetch();
       })
       .catch((error) => {
         console.error('Error Posting to Server', error)
       })
   };
 
-  // fetch () {
-  //   axios
-  //     .get('/search')
-  //     .then()
-  //     .catch()
-  // };
+  fetch () {
+    axios
+      .get('/mixBase/search')
+      .then((tracks) => {
+        console.log(tracks.data)
+        this.setState({
+          tracks: tracks.data,
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
 
   render() {
     return (
@@ -58,7 +66,7 @@ class Search extends Component {
           value="Search"
           onClick={this.handleSearch}
         />
-        <List />
+        <List tracks={this.state.tracks}/>
       </div>
     );
   }

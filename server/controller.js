@@ -20,7 +20,13 @@ module.exports = {
     post: (req, res) => {
       let searchTerm = req.body.searchTerm;
       // var getData = async ( () => { 
-      getSpotify(searchTerm);
+      getSpotify(searchTerm, (err, data) => {
+        if (err) {
+          console.log('Error Posting to DB')
+        } else {
+          res.send(data);
+        }
+      });
       // });
       // getData()
       //   .then( (body)=> {
