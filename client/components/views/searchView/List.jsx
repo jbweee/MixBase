@@ -4,9 +4,11 @@ import ListEntry from "./ListEntry.jsx";
 const List = props => {
   return(
     <div>
-      Tracks List
-      {props.tracks.map( (track) => 
-        (<ListEntry track={track} key={track.id}/>)
+      <h3> Tracks List </h3>
+      {props.tracks.map( (track) => (
+        <div className="list-group">
+          <ListEntry track={track} key={track.id}/>
+        </div>)
       )}
     </div>
   )

@@ -89,7 +89,7 @@ module.exports = (term, callback) => {
         // use the access token to access the Spotify Web API
         var token = body.access_token;
         let options = {
-          url: `https://api.spotify.com/v1/search?q=name:${term}&type=track&limit=20`,
+          url: `https://api.spotify.com/v1/search?q=name:${term}&type=track&limit=10`,
           headers: {
             'Authorization': 'Bearer ' + token
           },

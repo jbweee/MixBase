@@ -16,10 +16,22 @@ class App extends Component {
   render() {
     return (
       <div>
-        Home Page
-        <nav>
-          <Link to="/search"> Search </Link>
-          <Link to="/saved"> Saved </Link>
+        <h2>MixBase</h2>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item"> 
+
+                  <Link to="/search" className="nav-link"> Search </Link> 
+
+              </li>
+              <li className="nav-item"> 
+
+                  <Link to="/saved" className="nav-link"> Saved </Link> 
+
+              </li>
+            </ul>
+          </div>
         </nav>
         <main>
           <Switch>

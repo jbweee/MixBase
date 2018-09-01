@@ -14,7 +14,12 @@ class Search extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.fetch = this.fetch.bind(this);
     this.post = this.post.bind(this);
+    this.spaceHandler = this.spaceHandler.bind(this);
   };
+
+  componentDidMount() {
+    this.fetch();
+  }
 
   handleChange (e) {
     this.setState({
@@ -23,7 +28,7 @@ class Search extends Component {
   };
 
   handleSearch () {
-    this.post(this.state.term);
+    this.post(this.spaceHandler(this.state.term));
   };
 
   post (term) {
@@ -52,20 +57,30 @@ class Search extends Component {
       })
   };
 
+  spaceHandler(term) {
+    if (term.includes(' ')) {
+      return term.split(' ').join('+');
+    }
+    return term;
+  }
+
   render() {
     return (
       <div>
-        Search Page
-        <input 
-          type="text" 
-          value={this.state.term}
-          onChange={this.handleChange}
-        />
-        <input 
-          type="button" 
-          value="Search"
-          onClick={this.handleSearch}
-        />
+        <form className="form-inline">
+          <input 
+            className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+            type="text" 
+            value={this.state.term}
+            onChange={this.handleChange}
+          />
+          <input 
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="button" 
+            value="Search"
+            onClick={this.handleSearch}
+          />
+        </form>
         <List tracks={this.state.tracks}/>
       </div>
     );

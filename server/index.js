@@ -20,10 +20,14 @@ app.use('/mixBase', router);
 // })
 app.use(function(req, res, next){
   let temp = req.url.split('/');
+
+  console.log('before', req.url)
   req.url = temp[temp.length-2];
   if(req.url.indexOf('.') === -1){
     req.url = '/';
+    console.log('after', req.url)
   }
+  console.log('more after', req.url)
   next();
 });
 

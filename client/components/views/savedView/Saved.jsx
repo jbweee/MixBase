@@ -10,7 +10,7 @@ class Saved extends Component {
     return (
       <div>
         Saved Page
-        <List />
+        {/* <List /> */}
       </div>
     );
   }
