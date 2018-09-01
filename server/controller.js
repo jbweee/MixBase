@@ -6,7 +6,7 @@ module.exports = {
     fetch: (req, res) => {
       db.Track
         .find()
-        .limit(20)
+        .limit(30)
         .exec( (err, tracks) => {
           if (err) {
             return res.status(404).send(err);

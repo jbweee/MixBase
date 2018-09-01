@@ -21,22 +21,6 @@ var authOptions = {
   // responseType: 'json'
 };
 
-///////////////////////////////////////////////////////////
-//takes those 20 tracks and extracts the key property
-//uses another search query with the appended ids
-// var findKeyOfTracks = (searchUrl) => {
-//   let options = {
-//     url: searchUrl,
-//     headers: {
-//       'Authorization': 'Bearer ' + token
-//     },
-//     json: true
-//   };
-//   request.get(options, function(error, response, body) {
-//     console.log(body);
-//     // console.log(body.audio_features);
-//   });
-// };
 ////////////////////////////////////////////////////////////
 
 //finds 20 tracks with the specified search query
@@ -47,53 +31,54 @@ var authOptions = {
 //     method: 'post',
 //     url: 'https://accounts.spotify.com/api/token',
 //     headers: {
-//       'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-//     },
+  //       'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+  //     },
 //     form: {
-//       grant_type: 'client_credentials'
-//     },
-//     // json: true
-//     responseType: 'json'
-//   })
-//     .then((body) => {
-//       console.log(body)
-      // let options = {
+  //       grant_type: 'client_credentials'
+  //     },
+  //     // json: true
+  //     responseType: 'json'
+  //   })
+  //     .then((body) => {
+    //       console.log(body)
+    // let options = {
       //   url: `https://api.spotify.com/v1/search?q=name:${term}&type=track&limit=20`,
       //   headers: {
-      //     'Authorization': 'Bearer ' + token
+        //     'Authorization': 'Bearer ' + token
       //   },
       //   json: true
       // }
       // console.log(token)
-//     })
-//     // .then(() => {
-//     //   axios
+      //     })
+      //     // .then(() => {
+        //     //   axios
 //     //     .get(`https://api.spotify.com/v1/search?q=name:${term}&type=track&limit=20`, options)
 //     //     .then((body) => {
-//     //       console.log('BODY', body);
-//     //     })
-
-//     // })
-//     .catch(err => {
-//       // console.error('ERROR', err);
-//     })
-// }
-//////////////////////////////////////////////////////////////////////////////////////
-var token;
-module.exports = (term, callback) => {
-  request
-    .post(authOptions, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        // use the access token to access the Spotify Web API
-        var token = body.access_token;
-        let options = {
-          url: `https://api.spotify.com/v1/search?q=${term}&type=track&limit=5`,
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          json: true
-        };
-        request
+  //     //       console.log('BODY', body);
+  //     //     })
+  
+  //     // })
+  //     .catch(err => {
+    //       // console.error('ERROR', err);
+    //     })
+    // }
+    //////////////////////////////////////////////////////////////////////////////////////
+    var token;
+    module.exports = (term, callback) => {
+      request
+      .post(authOptions, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+          // use the access token to access the Spotify Web API
+          var token = body.access_token;
+          let options = {
+            url: `https://api.spotify.com/v1/search?q=${term}&type=track&limit=5`,
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+            json: true
+          };
+          console.log('BEFORE: ', options)
+          request
           .get(options, function(error, res, body) {
             // console.log(body);
             if (error) {
@@ -101,48 +86,65 @@ module.exports = (term, callback) => {
             } else {
               let data = body.tracks.items;
               // console.log(body.tracks.items[0]);
-              db.save(data, (err, docs) => {
-                if (err) {
-                  console.error.bind(console, 'Error saving to DATABASE')
-                } else {
-                  console.log('DATA SAVED')
-                  callback(null, docs);
-                }
+              let searchUrl = `https://api.spotify.com/v1/audio-features/?ids=`
+              body.tracks.items.forEach( (track) => {
+                searchUrl += `${track.id},`
               })
-            }
-          });
+              searchUrl = searchUrl.slice(0, -1);
+              // console.log(searchUrl)
+              request
+                .post(authOptions, function(error, response, body) {
+                  if (!error && response.statusCode === 200) {
+                    var token = body.access_token;
+                    let options = {
+                      url: searchUrl,
+                      headers: {
+                        'Authorization': 'Bearer ' + token
+                      },
+                      json: true
+                    };
+                    console.log('AFTER: ', options)
+                    request.get(options, function(error, response, body) {
+                      if (error) {
+                        console.log(error);
+                      } else {
+                        let features = body.audio_features;
+                        // callback(null, body)
+                        db.save(data, features, (err, docs) => {
+                          if (err) {
+                            console.error.bind(console, 'Error saving to DATABASE')
+                          } else {
+                            console.log('DATA SAVED')
+                            callback(null, docs);
+                          }
+                        })   
+                      }
+                      // console.log(body.audio_features);
+                    });
+                  }
+                })
+              }
+            });
+          }
+          
+        })};
         // request
         //   .get(options, function(error, res, body) {
-        //     // console.log(body);
-        //     if (error) {
-        //       console.log("Error obtaining data from API");
-        //     } else {
-        //       let data = body.tracks.items;
+          //     // console.log(body);
+          //     if (error) {
+            //       console.log("Error obtaining data from API");
+            //     } else {
+              //       let data = body.tracks.items;
         //       // console.log(body.tracks.items[0]);
-        //       let searchUrl = `https://api.spotify.com/v1/audio-features?ids=`
-        //       body.tracks.items.forEach( (track) => {
-        //         searchUrl += `${track.id}%`
-        //       })
-        //       searchUrl = searchUrl.slice(0, -1);
-        //     }
-        //   });
-        // }
-}})};
-////////////////////////////////////////////////////////////
-// rp(options)
-//   .then((body) => {
-//     console.log(body.tracks.items)
-//     return body.tracks.items;
-//     //////////////////////////////////////////////////////////////////
-//     // let searchUrl = `https://api.spotify.com/v1/audio-features?ids=`
-//     // body.tracks.items.forEach( (track) => {
-//     //   searchUrl += `${track.id}%`
-//     // })
-//     // searchUrl = searchUrl.slice(0, -1);
-
-//     // findKeyOfTracks(searchUrl);
-//     ///////////////////////////////////////////////////////////////////
-//   })
-//   .catch((err) => {
-//     console.error('Unable to get tracks')
-//   })
+        //       db.save(data, (err, docs) => {
+        //         if (err) {
+          //           console.error.bind(console, 'Error saving to DATABASE')
+          //         } else {
+            //           console.log('DATA SAVED')
+            //           callback(null, docs);
+            //         }
+            //       })
+            //     }
+            //   });
+        ///////////////////////////////////////////////////////////
+      

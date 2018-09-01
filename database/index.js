@@ -25,23 +25,25 @@ let trackSchema = mongoose.Schema({
   url: String,
 
   title: String,
+  key: Number
 });
 
 let Track = mongoose.model('Track', trackSchema);
 
-let save = (tracks, callback) => {
-    var mappedData = tracks.map( (track) => {
-      return {
-        id: track.id,
-        artist: track.artists[0].name,
-        url: track.external_urls.spotify,
-        
-        title: track.name,
-      }
+let save = (tracks, features, callback) => {
+  let mappedData = [];
+  for (let i = 0; i < tracks.length; i++) {
+    mappedData.push({
+      id: tracks[i].id,
+      artist: tracks[i].artists[0].name,
+      url: tracks[i].external_urls.spotify,
+      title: tracks[i].name,
+      key: features[i].key,
     })
-    Track.insertMany(mappedData)
-      .then((docs) => callback(null, docs))
-      .catch((err) => console.log('ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRRR', err));
+  };
+  Track.insertMany(mappedData)
+    .then((docs) => callback(null, docs))
+    .catch((err) => console.log('ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRRR', err));
   //     , (err, docs) => {
   //     if (err) {
   //       console.log(err);

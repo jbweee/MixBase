@@ -7,6 +7,7 @@ const ListEntry = props => {
         <h5 className="mb-1">
           {props.track.title}
         </h5>
+        <h6>{props.track.key}</h6>
       </div> 
         <small className="mb-1">
           {props.track.artist}
