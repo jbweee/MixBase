@@ -1,6 +1,4 @@
-// var models = require('../database/models.js');
 const getSpotify = require('../helper/getSpotify.js'); 
-const async = require('asyncawait/async');
 const db = require('../database/index.js');
 
 module.exports = {

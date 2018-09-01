@@ -18,10 +18,10 @@ let trackSchema = mongoose.Schema({
   // TODO: your schema here!
   //what happens if same ID?
   id: {
-    type: Number,
+    type: String,
     unique: true,
   },
-//   artist: String,
+  artist: String,
   url: String,
 
   title: String,
@@ -33,7 +33,7 @@ let save = (tracks, callback) => {
     var mappedData = tracks.map( (track) => {
       return {
         id: track.id,
-        //   artist: String,
+        artist: track.artists[0].name,
         url: track.external_urls.spotify,
         
         title: track.name,
