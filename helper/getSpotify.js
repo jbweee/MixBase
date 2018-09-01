@@ -4,8 +4,6 @@ const request = require('request');
 const axios = require('axios');
 const config = require('../config.js');
 const db = require('../database/index.js');
-// e847d955fe0a48a9af25077443749640
-// ff3010f035d4492a84fc380742869aa1
 var client_id = config.CLIENT_ID; // Your client id
 var client_secret = config.CLIENT_SECRET; // Your secret
 
@@ -89,7 +87,7 @@ module.exports = (term, callback) => {
         // use the access token to access the Spotify Web API
         var token = body.access_token;
         let options = {
-          url: `https://api.spotify.com/v1/search?q=name:${term}&type=track&limit=10`,
+          url: `https://api.spotify.com/v1/search?q=${term}&type=track&limit=5`,
           headers: {
             'Authorization': 'Bearer ' + token
           },
@@ -109,14 +107,27 @@ module.exports = (term, callback) => {
                 } else {
                   console.log('DATA SAVED')
                   callback(null, docs);
-                  // console.log(res)
-                  // res.send('GET request ENDED');
                 }
               })
             }
           });
-        }
-})};
+        // request
+        //   .get(options, function(error, res, body) {
+        //     // console.log(body);
+        //     if (error) {
+        //       console.log("Error obtaining data from API");
+        //     } else {
+        //       let data = body.tracks.items;
+        //       // console.log(body.tracks.items[0]);
+        //       let searchUrl = `https://api.spotify.com/v1/audio-features?ids=`
+        //       body.tracks.items.forEach( (track) => {
+        //         searchUrl += `${track.id}%`
+        //       })
+        //       searchUrl = searchUrl.slice(0, -1);
+        //     }
+        //   });
+        // }
+}})};
 ////////////////////////////////////////////////////////////
 // rp(options)
 //   .then((body) => {

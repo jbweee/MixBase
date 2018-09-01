@@ -28,6 +28,7 @@ class Search extends Component {
   };
 
   handleSearch () {
+    console.log(this.spaceHandler(this.state.term))
     this.post(this.spaceHandler(this.state.term));
   };
 
@@ -59,7 +60,7 @@ class Search extends Component {
 
   spaceHandler(term) {
     if (term.includes(' ')) {
-      return term.split(' ').join('+');
+      return term.split(' ').join('%20');
     }
     return term;
   }
