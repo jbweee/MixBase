@@ -1,15 +1,17 @@
 var path = require('path');
-var SRC_DIR = path.join(__dirname, '/client');
-var DIST_DIR = path.join(__dirname, '/static');
+var SRC_DIR = path.resolve(__dirname, './client');
+var DIST_DIR = path.resolve(__dirname, './static');
+// var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
-    path: DIST_DIR
+    path: DIST_DIR,
+    // publicPath: '/'
   },
   module : {
-    loaders : [
+    rules : [
       {
         test : /\.jsx?/,
         include : SRC_DIR,
@@ -19,5 +21,13 @@ module.exports = {
        }
       }
     ]
-  }
+  },
+  // devServer: {
+  //   historyApiFallback: true,
+  // },
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template: 'static/index.html'
+  //   })
+  // ]
 };

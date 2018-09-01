@@ -1,13 +1,14 @@
-var models = require('../database/models.js');
+// var models = require('../database/models.js');
+const getSpotify = require('../helper/getSpotify.js'); 
 
 module.exports = {
   search: {
-    get: (req, res) => {
-
+    fetch: (req, res) => {
+      
     }, 
 
     post: (req, res) => {
-
+      getSpotify(req.body.searchTerm);
     }
   },
 

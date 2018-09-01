@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch, Link} from "react-router-dom";
+import {Route, Switch, Link, Redirect} from "react-router-dom";
 import Search from './views/searchView/Search.jsx';
 import Saved from './views/savedView/Saved.jsx';
 
@@ -8,6 +8,11 @@ class App extends Component {
     super(props);
 
   }
+
+  // componentDidMount() {
+    
+  // }
+
   render() {
     return (
       <div>

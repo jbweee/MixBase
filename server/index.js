@@ -1,16 +1,32 @@
-var express = require('express');
-var parser = require('body-parser');
-var path = require('path');
-var router = require('./router.js');
-var PORT = 3000;
+const express = require('express');
+const parser = require('body-parser');
+const path = require('path');
+const router = require('./router.js');
+const PORT = 3000;
 
 var app = express();
 
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 
-app.use('/search', router);
-app.use('/saved', router);
+app.use('/mixBase', router);
+
+// app.use('/*', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, '../static/index.html'), (err) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   })
+// })
+app.use(function(req, res, next){
+  let temp = req.url.split('/');
+  req.url = temp[temp.length-2];
+  if(req.url.indexOf('.') === -1){
+    req.url = '/';
+  }
+  next();
+});
+
 //just need to set static to the folder
 app.use(express.static(path.resolve(__dirname, '../static')));
 

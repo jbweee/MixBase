@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Router} from "react-router-dom";
 import List from "./List.jsx";
+import axios from "axios";
 
 class Search extends Component {
   constructor(props) {
@@ -10,6 +11,8 @@ class Search extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    // this.fetch = this.fetch.bind(this);
+    this.post = this.post.bind(this);
   };
 
   handleChange (e) {
@@ -19,8 +22,27 @@ class Search extends Component {
   };
 
   handleSearch () {
-    console.log(this.state.term);
-  }
+    this.post(this.state.term);
+  };
+
+  post (term) {
+    axios
+      .post('/mixBase/search', { searchTerm: term } )
+      .then(() => {
+        console.log('Post sent to server')
+        //this.fetch();
+      })
+      .catch((error) => {
+        console.error('Error Posting to Server', error)
+      })
+  };
+
+  // fetch () {
+  //   axios
+  //     .get('/search')
+  //     .then()
+  //     .catch()
+  // };
 
   render() {
     return (
@@ -33,6 +55,7 @@ class Search extends Component {
         />
         <input 
           type="button" 
+          value="Search"
           onClick={this.handleSearch}
         />
         <List />

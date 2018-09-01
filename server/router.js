@@ -1,12 +1,14 @@
 var controller = require('./controller.js');
 var router = require('express').Router();
 
-router.get = ('/search', controller.search.get);
+router
+  .route('/search')
+  .get(controller.search.fetch)
+  .post(controller.search.post);
 
-router.post = ('/search', controller.search.post);
-
-// router.get = ('/saved', controller.saved.get);
-
-// router.post = ('/saved', controller.saved.post);
+// router
+//   .route('/saved')
+//   .get(controller.saved.get)
+//   .post(controller.saved.post);
 
 module.exports = router;
