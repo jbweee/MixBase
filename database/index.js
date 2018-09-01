@@ -25,6 +25,7 @@ let trackSchema = mongoose.Schema({
   url: String,
 
   title: String,
+
   key: String
 });
 
@@ -44,13 +45,7 @@ let save = (tracks, features, callback) => {
   };
   Track.insertMany(mappedData)
     .then((docs) => callback(null, docs))
-    .catch((err) => console.log('ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRRR', err));
-  //     , (err, docs) => {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       console.log('inserted mappedData')
-  //       callback(null, docs); 
+    .catch((err) => console.log('ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRRRRR', err)); 
 }
 
 module.exports.save = save;

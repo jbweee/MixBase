@@ -9,14 +9,10 @@ class App extends Component {
 
   }
 
-  // componentDidMount() {
-    
-  // }
-
   render() {
     return (
       <div>
-        <h2>MixBase</h2>
+        <h1>MixBase</h1>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
