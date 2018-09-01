@@ -1,6 +1,8 @@
+const express = require('express');
 const request = require('request');
 const rp = require('request-promise');
 const config = require('../config.js');
+const db = require('../database/index.js');
 // e847d955fe0a48a9af25077443749640
 // 5b766eb68ac4413c9767749f46d87ce5
 var client_id = config.CLIENT_ID; // Your client id
@@ -51,24 +53,39 @@ module.exports = (term) => {request.post(authOptions, function(error, response, 
       },
       json: true
     };
-    
-    rp(options)
-      .then((body) => {
-        // console.log(body.tracks.items)
-        return body.tracks.items;
-        //////////////////////////////////////////////////////////////////
-        // let searchUrl = `https://api.spotify.com/v1/audio-features?ids=`
-        // body.tracks.items.forEach( (track) => {
-        //   searchUrl += `${track.id}%`
-        // })
-        // searchUrl = searchUrl.slice(0, -1);
+    request.get(options, function(error, response, body) {
+      // console.log(body);
+      if (error) {
+        console.log("Error obtaining data from API");
+      } else {
+        let data = JSON.parse(body);
+        console.log(data);
+        db.save(body, (err, docs) => {
+          if (err) {
+            console.log(err);
+          } else {
+            response.send();
+          }
+        })
+      }
+    });
+    // rp(options)
+    //   .then((body) => {
+    //     console.log(body.tracks.items)
+    //     return body.tracks.items;
+    //     //////////////////////////////////////////////////////////////////
+    //     // let searchUrl = `https://api.spotify.com/v1/audio-features?ids=`
+    //     // body.tracks.items.forEach( (track) => {
+    //     //   searchUrl += `${track.id}%`
+    //     // })
+    //     // searchUrl = searchUrl.slice(0, -1);
 
-        // findKeyOfTracks(searchUrl);
-        ///////////////////////////////////////////////////////////////////
-      })
-      .catch((err) => {
-        console.error('Unable to get tracks')
-      })
+    //     // findKeyOfTracks(searchUrl);
+    //     ///////////////////////////////////////////////////////////////////
+    //   })
+    //   .catch((err) => {
+    //     console.error('Unable to get tracks')
+    //   })
   }
 })};
 
