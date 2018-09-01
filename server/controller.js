@@ -8,7 +8,8 @@ module.exports = {
     }, 
 
     post: (req, res) => {
-      getSpotify(req.body.searchTerm);
+      let searchTerm = req.body.searchTerm;
+      getSpotify.findTracks(searchTerm);
     }
   },
 
