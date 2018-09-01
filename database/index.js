@@ -25,12 +25,13 @@ let trackSchema = mongoose.Schema({
   url: String,
 
   title: String,
-  key: Number
+  key: String
 });
 
 let Track = mongoose.model('Track', trackSchema);
 
 let save = (tracks, features, callback) => {
+  let tones = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
   let mappedData = [];
   for (let i = 0; i < tracks.length; i++) {
     mappedData.push({
@@ -38,7 +39,7 @@ let save = (tracks, features, callback) => {
       artist: tracks[i].artists[0].name,
       url: tracks[i].external_urls.spotify,
       title: tracks[i].name,
-      key: features[i].key,
+      key: tones[features[i].key],
     })
   };
   Track.insertMany(mappedData)
