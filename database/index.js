@@ -26,7 +26,10 @@ let trackSchema = mongoose.Schema({
 
   title: String,
 
-  key: String
+  key: String,
+  tempo: Number,
+  time_signature: Number,
+  danceability: Number
 });
 
 let Track = mongoose.model('Track', trackSchema);
@@ -41,6 +44,9 @@ let save = (tracks, features, callback) => {
       url: tracks[i].external_urls.spotify,
       title: tracks[i].name,
       key: tones[features[i].key],
+      tempo: features[i].tempo,
+      time_signature: features[i].time_signature,
+      danceability: features[i].danceability
     })
   };
   Track.insertMany(mappedData)

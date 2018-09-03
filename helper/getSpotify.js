@@ -59,22 +59,23 @@ module.exports = (term, callback) => {
                   },
                   json: true
                 };
-                request.get(options, function(error, response, body) {
-                  if (error) {
-                    console.log(error);
-                  } else {
-                    let features = body.audio_features;
-                    // callback(null, body)
-                    db.save(data, features, (err, docs) => {
-                      if (err) {
-                        console.error.bind(console, 'Error saving to DATABASE')
-                      } else {
-                        callback(null, docs);
-                      }
-                    })   
-                  }
-                  // console.log(body.audio_features);
-                });
+                request
+                  .get(options, function(error, response, body) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      let features = body.audio_features;
+                      // callback(null, body)
+                      db.save(data, features, (err, docs) => {
+                        if (err) {
+                          console.error.bind(console, 'Error saving to DATABASE')
+                        } else {
+                          callback(null, docs);
+                        }
+                      })   
+                    }
+                    // console.log(body.audio_features);
+                  });
               }
             })
           }
