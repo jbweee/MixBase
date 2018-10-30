@@ -6,6 +6,9 @@ router
   .get(controller.search.fetch)
   .post(controller.search.post);
 
+router
+  .route('/login')
+  .get(controller.login.fetch)
 // router
 //   .route('/saved')
 //   .get(controller.saved.get)
