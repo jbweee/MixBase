@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch, Link, Redirect} from "react-router-dom";
+import Home from './views/homeView/Home.jsx';
 import Search from './views/searchView/Search.jsx';
 import Saved from './views/savedView/Saved.jsx';
 
@@ -31,6 +32,7 @@ class App extends Component {
         </nav>
         <main>
           <Switch>
+            <Route path="/home" component={Home} />
             <Route path="/search" component={Search} />
             <Route path="/saved" component={Saved} />
           </Switch>
