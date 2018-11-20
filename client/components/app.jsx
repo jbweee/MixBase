@@ -14,10 +14,10 @@ class App extends Component {
     return (
       <div>
         <h1>MixBase</h1>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item"> 
+        <nav>
+          <div>
+            <ul>
+              <li> 
 
                   <Link to="/search" className="nav-link"> Search </Link> 
 
