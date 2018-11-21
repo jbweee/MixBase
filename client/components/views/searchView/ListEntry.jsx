@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListEntry = props => {
+const ListEntry = (props) => {
   return (
     <a href={props.track.url}>
       <div>

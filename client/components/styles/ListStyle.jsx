@@ -4,7 +4,7 @@ const ListWrapper = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
-  background: black;
+  flex-wrap: wrap;
   /* align content
   rows
   overflow

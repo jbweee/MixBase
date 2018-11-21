@@ -11,9 +11,9 @@ module.exports = {
   module : {
     rules : [
       {
-        test : /\.jsx?/,
-        include : SRC_DIR,
-        loader : 'babel-loader',      
+        loader : 'babel-loader',
+        test: /\.js[x]?/,
+        exclude: /(node_modules|dep)/,    
         query: {
           presets: ['react', 'es2015', 'env'],
           plugins: [
@@ -24,4 +24,7 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
 };

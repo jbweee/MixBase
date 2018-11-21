@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
-const Card = styled.div`
+export const CardOuter = styled.div`
   display: block;
-  height: 100px;
   width: 20%;
-  margin: 10px;
+  padding: 10px;
+  
   /* figure out how to do pagination:
     Don't render until it is shown on the page */
 `;
 
-export default Card;
+export const CardInner = styled.div`
+  display: flex;
+  border: 1px solid #000000;
+`;

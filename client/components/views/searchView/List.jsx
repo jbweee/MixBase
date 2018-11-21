@@ -1,19 +1,21 @@
 import React from "react";
 import ListEntry from "./ListEntry.jsx";
 import ListWrapper from "../../styles/ListStyle.jsx";
-import Card from '../../styles/CardStyle.jsx';
+import {CardInner, CardOuter} from '../../styles/CardStyle.jsx';
 
-const List = props => {
-  return(
+const List = (props) => (
+  <React.Fragment>
+    <h3> Tracks List </h3>
     <ListWrapper>
-      <h3> Tracks List </h3>
       {props.tracks.map( (track) => (
-        <Card>
-          <ListEntry track={track} key={track.id}/>
-        </Card>)
+        <CardOuter>
+          <CardInner>
+            <ListEntry track={track} key={track.id}/>
+          </CardInner>
+        </CardOuter>)
       )}
     </ListWrapper>
-  )
-}
+  </React.Fragment>
+)
 
 export default List;

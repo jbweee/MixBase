@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch, Link, Redirect} from "react-router-dom";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Home from './views/homeView/Home.jsx';
 import Search from './views/searchView/Search.jsx';
 import Saved from './views/savedView/Saved.jsx';
@@ -7,12 +8,14 @@ import Saved from './views/savedView/Saved.jsx';
 class App extends Component {
   constructor (props) {
     super(props);
-
   }
 
   render() {
     return (
-      <div>
+      <div 
+        style={styles.screen}
+      >
+        <CssBaseline/>
         <h1>MixBase</h1>
         <nav>
           <div>
@@ -39,6 +42,14 @@ class App extends Component {
         </main>
       </div>
     )
+  }
+}
+
+const styles = {
+  screen: {
+    "color": "white",
+    "background": "#708090",
+    "height": "100vh",
   }
 }
 
