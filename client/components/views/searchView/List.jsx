@@ -1,7 +1,7 @@
 import React from "react";
 import ListEntry from "./ListEntry.jsx";
 import ListWrapper from "../../styles/ListStyle.jsx";
-import {CardInner, CardOuter} from '../../styles/CardStyle.jsx';
+import {CardOuter} from '../../styles/CardStyle.jsx';
 
 const List = (props) => (
   <React.Fragment>
@@ -9,11 +9,9 @@ const List = (props) => (
     <ListWrapper>
       {props.tracks.map( (track) => (
         <CardOuter>
-          <CardInner>
-            <ListEntry track={track} key={track.id}/>
-          </CardInner>
-        </CardOuter>)
-      )}
+          <ListEntry track={track} key={track.id}/>
+        </CardOuter>
+      ))}
     </ListWrapper>
   </React.Fragment>
 )

@@ -1,24 +1,45 @@
 import React from 'react';
+import {CardInner} from '../../styles/CardStyle.jsx';
 
 const ListEntry = (props) => {
   return (
-    <a href={props.track.url}>
+    <CardInner>
       <div>
-        <h5>
-          {props.track.title} <br/>
-          <small>
-            {props.track.artist}
-          </small>
-        </h5>
-        <small>
-          <h6>Key: {props.track.key}</h6>
-          Tempo: {props.track.tempo} <br/>
-          Time Signature: {props.track.time_signature} <br/>
-          Danceability: {props.track.danceability} <br/>
-        </small>
-      </div> 
-    </a>
+        {/* Album Art and Buttons */}
+        <div>
+          {/* Album Art */}
+          <a href={props.track.url}>
+
+          </a>
+        </div>
+        <div>
+          {/* Buttons */}
+          <div>
+            {/* Save Button */}
+          </div>
+          <div>
+            {/* Key Button -> Can sort all songs by the key and adjacent keys*/}
+            {props.track.key}
+          </div>
+          <div>
+            {/* More Details */}
+          </div>
+        </div>
+      </div>
+      <div>
+        {/* Artist Name */}
+        {props.track.artist}
+      </div>
+      <div>
+        {/* Song Title */}
+        {props.track.title}
+      </div>
+    </CardInner>
   )
 };
 
 export default ListEntry;
+
+//Tempo: {props.track.tempo}
+//Time Signature: {props.track.time_signature}
+//Danceability: {props.track.danceability}

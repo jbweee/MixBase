@@ -16,7 +16,7 @@ class App extends Component {
         style={styles.screen}
       >
         <CssBaseline/>
-        <h1>MixBase</h1>
+        <h1 style={{"margin": "0"}}>MixBase</h1>
         <nav>
           <div>
             <ul>
@@ -48,7 +48,7 @@ class App extends Component {
 const styles = {
   screen: {
     "color": "white",
-    "background": "#708090",
+    "background": "#1E1F21",
     "height": "100vh",
   }
 }
