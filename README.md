@@ -1,7 +1,8 @@
 # MixBase
-Currently a work in progress.
 
-Upon searching, it automatically saves to the database. Will eventually just render searches to the page and have a button next to the songs that will save to the saved page.
+Spotify search engine that allows the user to obtain audio properties for songs. Mainly catered towards DJs who want to quickly look up the key, bpm, vocalness, danceabilitiy, etc. of the song. 
+
+Currently a work in progress.
 
 ## How to start this app
 
