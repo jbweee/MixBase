@@ -8,8 +8,8 @@ const List = (props) => (
     <h3> Tracks List </h3>
     <ListWrapper>
       {props.tracks.map( (track) => (
-        <CardOuter>
-          <ListEntry track={track} key={track.id}/>
+        <CardOuter key={track.id}>
+          <ListEntry track={track}/>
         </CardOuter>
       ))}
     </ListWrapper>

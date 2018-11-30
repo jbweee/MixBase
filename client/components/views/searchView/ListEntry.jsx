@@ -2,6 +2,7 @@ import React from 'react';
 import {CardInner} from '../../styles/CardStyle.jsx';
 
 const ListEntry = (props) => {
+  let mode = props.track.mode ? 'B' : 'A';
   return (
     <CardInner>
       <div>
@@ -19,7 +20,7 @@ const ListEntry = (props) => {
           </div>
           <div>
             {/* Key Button -> Can sort all songs by the key and adjacent keys*/}
-            {props.track.key}
+            {props.track.key + mode}
           </div>
           <div>
             {/* More Details */}
