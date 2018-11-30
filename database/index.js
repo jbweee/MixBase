@@ -27,6 +27,7 @@ let trackSchema = mongoose.Schema({
   title: String,
 
   key: String,
+  mode: Number,
   tempo: Number,
   time_signature: Number,
   danceability: Number
@@ -35,7 +36,7 @@ let trackSchema = mongoose.Schema({
 let Track = mongoose.model('Track', trackSchema);
 
 let save = (tracks, features, callback) => {
-  let tones = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
+  let tones = ['8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7'];
   let mappedData = [];
   for (let i = 0; i < tracks.length; i++) {
     mappedData.push({
@@ -44,6 +45,7 @@ let save = (tracks, features, callback) => {
       url: tracks[i].external_urls.spotify,
       title: tracks[i].name,
       key: tones[features[i].key],
+      mode: features[i].mode,
       tempo: features[i].tempo,
       time_signature: features[i].time_signature,
       danceability: features[i].danceability
