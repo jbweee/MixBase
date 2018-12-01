@@ -49,7 +49,7 @@ const styles = {
   screen: {
     "color": "white",
     "background": "#1E1F21",
-    "height": "100vh",
+    "height": "100%",
   }
 }
 
