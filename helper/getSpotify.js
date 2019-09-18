@@ -3,11 +3,12 @@ const request = require('request');
 // const rp = require('request-promise');
 const axios = require('axios');
 const config = require('../config.js');
-const db = require('../database/index.js');
+// const db = require('../database/index.js');
 var client_id = config.CLIENT_ID; // Your client id
 var client_secret = config.CLIENT_SECRET; // Your secret
+console.log(client_id, client_secret)
 
-// your application requests authorization
+// application requests authorization
 var authOptions = {
   // method: 'post',
   url: 'https://accounts.spotify.com/api/token',
@@ -36,18 +37,18 @@ module.exports = (term, callback) => {
       };
       request
       .get(options, function(error, res, body) {
-        // console.log(body);
+        console.log(body);
         if (error) {
           console.log("Error obtaining data from API");
         } else {
           let data = body.tracks.items;
-          // console.log(body.tracks.items[0]);
+          console.log(body.tracks.items[0]);
           let searchUrl = `https://api.spotify.com/v1/audio-features/?ids=`
           body.tracks.items.forEach( (track) => {
             searchUrl += `${track.id},`
           })
           searchUrl = searchUrl.slice(0, -1);
-          // console.log(searchUrl)
+          console.log(searchUrl)
           request
             .post(authOptions, function(error, response, body) {
               if (!error && response.statusCode === 200) {
@@ -66,15 +67,16 @@ module.exports = (term, callback) => {
                     } else {
                       let features = body.audio_features;
                       // callback(null, body)
-                      db.save(data, features, (err, docs) => {
-                        if (err) {
-                          console.error.bind(console, 'Error saving to DATABASE')
-                        } else {
-                          callback(null, docs);
-                        }
-                      })   
+                      console.log(data, features)
+                      // db.save(data, features, (err, docs) => {
+                      //   if (err) {
+                      //     console.error.bind(console, 'Error saving to DATABASE')
+                      //   } else {
+                      //     callback(null, docs);
+                      //   }
+                      // })   
                     }
-                    // console.log(body.audio_features);
+                    console.log(body.audio_features);
                   });
               }
             })
