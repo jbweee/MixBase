@@ -4,7 +4,7 @@ var router = require('express').Router();
 router
   .route('/search')
   .get(controller.search.fetch)
-  .post(controller.search.post);
+  // .post(controller.search.post);
 
 router
   .route('/login')
