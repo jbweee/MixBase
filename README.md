@@ -11,8 +11,9 @@ Currently a work in progress.
 - `npm run react-dev`
 
 ## Todo:
-- [ ] Strip mongoDB from the project (do not need to save search results to a database)
-    - [ ] Rewire so that the results are rendered and formatted to the screen after searching (incorporate a loading state)
+- [x] Strip mongoDB from the project (do not need to save search results to a database)
+    - [x] Rewire so that the results are rendered and formatted to the screen after searching 
+    - [ ] Incorporate a loading state
 - [ ] Rewrite React components with React Hooks
 - [ ] Have OAuth2 with Spotify to allow users to save their saved songs to a playlist
 - [ ] When searching songs and getting keys, translate it to a color with an array with the search and set the color style in for the card

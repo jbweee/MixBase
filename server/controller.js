@@ -7,34 +7,15 @@ var my_client_id = config.CLIENT_ID;
 module.exports = {
   search: {
     fetch: (req, res) => {
-      db.Track
-        .find()
-        .limit(30)
-        .exec( (err, tracks) => {
-          if (err) {
-            return res.status(404).send(err);
-          }
-          else {
-            return res.status(200).send(tracks)
-          }
-        })
-    }, 
-
-    post: (req, res) => {
-      let searchTerm = req.body.searchTerm;
+      let searchTerm = req.query.searchTerm;
       // var getData = async ( () => { 
       getSpotify(searchTerm, (err, data) => {
         if (err) {
-          console.log('Error Posting to DB')
+          console.error('Error fetching from Spotify API')
         } else {
           res.send(data);
         }
       });
-      // });
-      // getData()
-      //   .then( (body)=> {
-      //     console.log(body)
-      //   })
     }
   },
 

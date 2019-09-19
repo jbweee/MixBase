@@ -35,7 +35,7 @@ let trackSchema = mongoose.Schema({
 
 let Track = mongoose.model('Track', trackSchema);
 
-let save = (tracks, features, callback) => {
+const save = (tracks, features, callback) => {
   let tones = ['8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7'];
   let mappedData = [];
   for (let i = 0; i < tracks.length; i++) {

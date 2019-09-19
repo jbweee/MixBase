@@ -18,7 +18,7 @@ class Search extends Component {
   };
 
   componentDidMount() {
-    this.fetch();
+    // this.fetch();
   }
 
   handleChange (e) {
@@ -28,8 +28,8 @@ class Search extends Component {
   };
 
   handleSearch () {
-    console.log(this.spaceHandler(this.state.term))
-    this.post(this.spaceHandler(this.state.term));
+    // console.log(this.spaceHandler(this.state.term))
+    this.fetch(this.spaceHandler(this.state.term));
   };
 
   post (term) {
@@ -44,9 +44,13 @@ class Search extends Component {
       })
   };
 
-  fetch () {
+  fetch (term) {
     axios
-      .get('/mixBase/search')
+      .get(`/mixBase/search`, {
+        params: {
+          searchTerm: term
+        }
+      })
       .then((tracks) => {
         console.log(tracks.data)
         this.setState({
@@ -54,7 +58,7 @@ class Search extends Component {
         })
       })
       .catch(err => {
-        console.log(err)
+        console.error(err)
       })
   };
 
