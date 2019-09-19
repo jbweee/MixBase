@@ -3,6 +3,7 @@ mongoose.connect(
   'mongodb://localhost/music',
   { useNewUrlParser: true }
 );
+mongoose.set('useCreateIndex', true);
 
 //make connection and have error and open signalling
 var db = mongoose.connection;

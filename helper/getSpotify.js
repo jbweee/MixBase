@@ -7,12 +7,11 @@ const config = require('../config.js');
 var client_id = config.CLIENT_ID; // Your client id
 var client_secret = config.CLIENT_SECRET; // Your secret
 
-// application requests authorization
 var authOptions = {
   // method: 'post',
   url: 'https://accounts.spotify.com/api/token',
   headers: {
-    'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+    'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
   },
   form: {
     grant_type: 'client_credentials'
@@ -50,7 +49,7 @@ module.exports = (term, callback) => {
       // use the access token to access the Spotify Web API
       var token = body.access_token;
       let options = {
-        url: `https://api.spotify.com/v1/search?q=${term}&type=track&limit=10`,
+        url: `https://api.spotify.com/v1/search?q=${term}&type=track&limit=20`,
         headers: {
           'Authorization': 'Bearer ' + token
         },
